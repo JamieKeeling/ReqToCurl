@@ -1,0 +1,21 @@
+language: csharp 
+dist: xenial
+mono: none
+dotnet: 2.2
+
+branches:
+  only:
+    - master
+    - /^(\d+\.)?(\d+\.)?(\*|\d+)$/
+
+script:
+  - dotnet build ${TRAVIS_BUILD_DIR}/src/ReqToCurl/ReqToCurl.csproj -c Release
+  - dotnet test ${TRAVIS_BUILD_DIR}/test/ReqToCurl.Tests/ReqToCurl.Tests.csproj --no-build
+  - dotnet pack ${TRAVIS_BUILD_DIR}/src/ReqToCurl/ReqToCurl.csproj -c Release -o ${TRAVIS_BUILD_DIR}/artifacts --no-build
+
+deploy:
+  skip_cleanup: true
+  provider: script
+  script: bash deploy/pushToNuget.sh
+  on:
+    tags: true
