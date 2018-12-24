@@ -6,7 +6,6 @@
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <Version>0.0.0-alpha.1</Version>
     <Authors>Jamie Keeling</Authors>
     <PackageLicenseUrl>https://raw.githubusercontent.com/JamieKeeling/ReqToCurl/master/LICENSE</PackageLicenseUrl>
     <RepositoryUrl>https://github.com/JamieKeeling/ReqToCurl</RepositoryUrl>
