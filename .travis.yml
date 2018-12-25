@@ -10,7 +10,7 @@ branches:
 
 script:
   - dotnet build ${TRAVIS_BUILD_DIR}/src/ReqToCurl/ReqToCurl.csproj -c Release
-  - dotnet test ${TRAVIS_BUILD_DIR}/test/ReqToCurl.Tests/ReqToCurl.Tests.csproj -c Release --no-build
+  - dotnet test ${TRAVIS_BUILD_DIR}/test/ReqToCurl.Tests/ReqToCurl.Tests.csproj
 
 deploy:
   skip_cleanup: true
