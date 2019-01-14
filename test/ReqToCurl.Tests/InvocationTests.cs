@@ -15,7 +15,7 @@ namespace ReqToCurl.Tests
         {
             var mockLogger = new Mock<ILogger<RequestToCurlMiddleware>>();
 
-            var middlewareInstance = new RequestToCurlMiddleware((innerHttpContext) => Task.FromResult(0), mockLogger.Object);
+            var middlewareInstance = new RequestToCurlMiddleware((innerHttpContext) => Task.FromResult(0), mockLogger.Object, Mock.Of<ICurlExtractor>());
 
             var mockHttpResponse = new Mock<HttpResponse>();
             mockHttpResponse.SetupGet(p => p.HasStarted).Returns(true);
@@ -39,7 +39,7 @@ namespace ReqToCurl.Tests
         {
             var mockLogger = new Mock<ILogger<RequestToCurlMiddleware>>();
 
-            var middlewareInstance = new RequestToCurlMiddleware((innerHttpContext) => Task.FromResult(0), mockLogger.Object);
+            var middlewareInstance = new RequestToCurlMiddleware((innerHttpContext) => Task.FromResult(0), mockLogger.Object, Mock.Of<ICurlExtractor>());
 
             var mockHttpResponse = new Mock<HttpResponse>();
             mockHttpResponse.SetupGet(p => p.HasStarted).Returns(false);
