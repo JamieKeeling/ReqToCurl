@@ -6,7 +6,8 @@ namespace ReqToCurl
     {
         public static IServiceCollection AddReqToCurl(this IServiceCollection services)
         {
-            //TODO: Configure DI here
+            services.AddTransient<ICurlExtractor, CurlExtractor>();
+
             return services;
         }
     }

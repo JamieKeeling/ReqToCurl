@@ -8,11 +8,13 @@ namespace ReqToCurl
     {
         private readonly RequestDelegate _next;
         private readonly ILogger<RequestToCurlMiddleware> _logger;
+        private readonly ICurlExtractor _curlExtractor;
 
-        public RequestToCurlMiddleware(RequestDelegate next, ILogger<RequestToCurlMiddleware> logger)
+        public RequestToCurlMiddleware(RequestDelegate next, ILogger<RequestToCurlMiddleware> logger, ICurlExtractor curlExtractor)
         {
             _next = next;
             _logger = logger;
+            _curlExtractor = curlExtractor;
         }
 
         public async Task InvokeAsync(HttpContext context)
@@ -24,6 +26,7 @@ namespace ReqToCurl
             {
                 //TODO: Verify response status code matches options, otherwise ignore
                 _logger.Log(LogLevel.Information, $"Response has started with a HTTP {context.Response.StatusCode} value");
+                _logger.Log(LogLevel.Information, _curlExtractor.ExtractRequest(context));
             }
         }
     }
