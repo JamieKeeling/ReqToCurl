@@ -13,7 +13,7 @@ namespace ReqToCurl.Tests.Output
         [Fact]
         public async void Invoked_WithMinimumRequest_OutputsCurlString()
         {
-            var curlString = "curl -X POST https://tempurl.com:12345/path1/path2/path3?x=1&y=2&z=3\r\n";
+            var curlString = $"curl -X POST https://tempurl.com:12345/path1/path2/path3?x=1&y=2&z=3" + Environment.NewLine;
             var mockCurlExtractor = new Mock<ICurlExtractor>();
             mockCurlExtractor.Setup(m => m.ExtractRequest(It.IsAny<HttpContext>())).Returns(curlString);
 

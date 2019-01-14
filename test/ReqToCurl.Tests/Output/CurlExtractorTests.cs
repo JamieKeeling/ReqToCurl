@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using Microsoft.AspNetCore.Http;
 using Moq;
+using System;
 using Xunit;
 
 namespace ReqToCurl.Tests.String_Output
@@ -28,7 +29,7 @@ namespace ReqToCurl.Tests.String_Output
 
             var extractor = new CurlExtractor(null);
 
-            var expectedOutput = $"curl -X {httpMethod} {httpScheme}://{host}{path.Value}{queryString}\r\n";
+            var expectedOutput = $"curl -X {httpMethod} {httpScheme}://{host}{path.Value}{queryString}" + Environment.NewLine;
             var actualOutput = extractor.ExtractRequest(mockHttpContext.Object);
 
             actualOutput.Should().BeEquivalentTo(expectedOutput);
