@@ -5,6 +5,6 @@ namespace ReqToCurl.Pipeline
     public interface IExtractionStep
     {
         bool CanExtract(HttpContext context);
-        bool Extract(HttpContext context);
+        string Extract(HttpContext context);
     }
 }
