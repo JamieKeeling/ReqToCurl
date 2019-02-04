@@ -18,7 +18,7 @@ namespace ReqToCurl
 
         public string ExtractRequest(HttpContext context)
         {
-            curlRequest.AppendLine($"curl -X {context.Request.Method} {context.Request.GetEncodedUrl()}");
+            curlRequest.AppendLine($"curl {context.Request.GetEncodedUrl()}");
             
             return curlRequest.ToString();
         }

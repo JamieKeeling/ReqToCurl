@@ -12,13 +12,11 @@ namespace ReqToCurl.Tests.String_Output
         public void Extractor_WithRequest_OutputsBaseCommand()
         {
             const string httpScheme = "https";
-            const string httpMethod = "POST";
             var host = new HostString("tempurl.com:12345");
             var queryString = new QueryString("?x=1&y=2&z=3");
             var path = new PathString("/path1/path2/path3");
 
             var mockHttpRequest = new Mock<HttpRequest>();
-            mockHttpRequest.SetupGet(p => p.Method).Returns(httpMethod);
             mockHttpRequest.SetupGet(p => p.Scheme).Returns(httpScheme);
             mockHttpRequest.SetupGet(p => p.Host).Returns(host);
             mockHttpRequest.SetupGet(p => p.QueryString).Returns(queryString);
@@ -29,7 +27,7 @@ namespace ReqToCurl.Tests.String_Output
 
             var extractor = new CurlExtractor(null);
 
-            var expectedOutput = $"curl -X {httpMethod} {httpScheme}://{host}{path.Value}{queryString}" + Environment.NewLine;
+            var expectedOutput = $"curl {httpScheme}://{host}{path.Value}{queryString}" + Environment.NewLine;
             var actualOutput = extractor.ExtractRequest(mockHttpContext.Object);
 
             actualOutput.Should().BeEquivalentTo(expectedOutput);
