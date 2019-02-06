@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
-using ReqToCurl.Pipeline;
+using ReqToCurl.Steps;
 using System.Linq;
 
 namespace ReqToCurl.Steps

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 
-namespace ReqToCurl.Pipeline
+namespace ReqToCurl.Steps
 {
     public interface IExtractionStep
     {
