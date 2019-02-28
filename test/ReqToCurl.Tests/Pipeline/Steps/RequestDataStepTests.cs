@@ -50,6 +50,8 @@ namespace ReqToCurl.Tests.Pipeline.Steps
             var jsonPayload = JsonConvert.SerializeObject(new { Name = "Jamie" });
             var memoryStream = new MemoryStream(Encoding.UTF8.GetBytes(jsonPayload));
 
+            var expectedOutput = $"-d '{jsonPayload}'";
+
             var mockHttpRequest = new Mock<HttpRequest>();
             mockHttpRequest.SetupGet(p => p.Body).Returns(memoryStream);
 
@@ -60,7 +62,7 @@ namespace ReqToCurl.Tests.Pipeline.Steps
 
             var extractedData = await requestDataStep.ExtractAsync(mockHttpContext.Object);
 
-            extractedData.Should().NotBeNullOrWhiteSpace();
+            extractedData.Should().BeEquivalentTo(expectedOutput);
         }
     }
 }
