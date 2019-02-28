@@ -30,7 +30,7 @@ namespace ReqToCurl.Tests.Pipeline
                 secondMockStep.Object
             };
 
-            var pipeline = new ReqToCurl.Pipeline.Pipeline(steps);
+            var pipeline = new ReqToCurl.Pipeline.ExtractionPipeline(steps);
 
             var extractedContent = pipeline.Execute(mockHttpContext);
 
@@ -55,7 +55,7 @@ namespace ReqToCurl.Tests.Pipeline
                 mockStep.Object
             };
 
-            var pipeline = new ReqToCurl.Pipeline.Pipeline(steps);
+            var pipeline = new ReqToCurl.Pipeline.ExtractionPipeline(steps);
 
             var extractedContent = pipeline.Execute(mockHttpContext);
 
@@ -77,7 +77,7 @@ namespace ReqToCurl.Tests.Pipeline
                 mockStep.Object
             };
 
-            var pipeline = new ReqToCurl.Pipeline.Pipeline(steps);
+            var pipeline = new ReqToCurl.Pipeline.ExtractionPipeline(steps);
 
             var exception = Assert.Throws<PipelineExtractionFailureException>(() => pipeline.Execute(mockHttpContext));
             exception.Message.Should().BeEquivalentTo("Failed to extract from configured steps");

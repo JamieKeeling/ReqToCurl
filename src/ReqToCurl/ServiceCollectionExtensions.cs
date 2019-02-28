@@ -9,7 +9,7 @@ namespace ReqToCurl
         public static IServiceCollection AddReqToCurl(this IServiceCollection services)
         {
             services.AddTransient<ICurlExtractor, CurlExtractor>();
-            services.AddTransient<IPipeline, Pipeline.Pipeline>();
+            services.AddTransient<IPipeline, ExtractionPipeline>();
 
             services.AddTransient<IExtractionStep, RequestHeaderStep>();
 

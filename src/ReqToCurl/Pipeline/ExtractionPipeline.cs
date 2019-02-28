@@ -7,11 +7,11 @@ using System.Text;
 
 namespace ReqToCurl.Pipeline
 {
-    public class Pipeline : IPipeline
+    public class ExtractionPipeline : IPipeline
     {
         private readonly IEnumerable<IExtractionStep> _extractionSteps;
 
-        public Pipeline(IEnumerable<IExtractionStep> extractionSteps)
+        public ExtractionPipeline(IEnumerable<IExtractionStep> extractionSteps)
         {
             _extractionSteps = extractionSteps;
         }
