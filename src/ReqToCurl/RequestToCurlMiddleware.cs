@@ -26,7 +26,7 @@ namespace ReqToCurl
             {
                 //TODO: Verify response status code matches options, otherwise ignore
                 _logger.Log(LogLevel.Information, $"Response has started with a HTTP {context.Response.StatusCode} value");
-                _logger.Log(LogLevel.Information, _curlExtractor.ExtractRequest(context));
+                _logger.Log(LogLevel.Information, await _curlExtractor.ExtractRequestAsync(context));
             }
         }
     }

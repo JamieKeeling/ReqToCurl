@@ -19,11 +19,11 @@ namespace ReqToCurl.Tests.Pipeline
 
             var firstMockStep = new Mock<IExtractionStep>();
             firstMockStep.Setup(m => m.CanExtract(It.IsAny<HttpContext>())).Returns(true);
-            firstMockStep.Setup(m => m.ExtractAsync(It.IsAny<HttpContext>())).Returns(Task.FromResult("ExtractedContent"));
+            firstMockStep.Setup(m => m.ExtractAsync(It.IsAny<HttpContext>())).ReturnsAsync("ExtractedContent");
 
             var secondMockStep = new Mock<IExtractionStep>();
             secondMockStep.Setup(m => m.CanExtract(It.IsAny<HttpContext>())).Returns(true);
-            secondMockStep.Setup(m => m.ExtractAsync(It.IsAny<HttpContext>())).Returns(Task.FromResult("ExtractedContent"));
+            secondMockStep.Setup(m => m.ExtractAsync(It.IsAny<HttpContext>())).ReturnsAsync("ExtractedContent");
 
             List<IExtractionStep> steps = new List<IExtractionStep>
             {
@@ -49,7 +49,7 @@ namespace ReqToCurl.Tests.Pipeline
 
             var mockStep = new Mock<IExtractionStep>();
             mockStep.Setup(m => m.CanExtract(It.IsAny<HttpContext>())).Returns(false);
-            mockStep.Setup(m => m.ExtractAsync(It.IsAny<HttpContext>())).Returns(Task.FromResult(string.Empty));
+            mockStep.Setup(m => m.ExtractAsync(It.IsAny<HttpContext>())).ReturnsAsync(string.Empty);
 
             List<IExtractionStep> steps = new List<IExtractionStep>
             {

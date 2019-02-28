@@ -12,6 +12,7 @@ namespace ReqToCurl
             services.AddTransient<IPipeline, ExtractionPipeline>();
 
             services.AddTransient<IExtractionStep, RequestHeaderStep>();
+            services.AddTransient<IExtractionStep, RequestDataStep>();
 
             return services;
         }

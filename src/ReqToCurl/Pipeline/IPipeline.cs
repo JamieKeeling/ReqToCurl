@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace ReqToCurl.Pipeline
 {
-    interface IPipeline
+    public interface IPipeline
     {
         Task<string> ExecuteAsync(HttpContext context);
     }
