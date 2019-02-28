@@ -24,8 +24,4 @@
     <ProjectReference Include="..\..\src\ReqToCurl\ReqToCurl.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Pipeline\Steps\" />
-  </ItemGroup>
-
 </Project>

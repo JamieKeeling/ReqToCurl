@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
 
-namespace ReqToCurl.Pipeline
+namespace ReqToCurl.Steps
 {
     public interface IExtractionStep
     {
         bool CanExtract(HttpContext context);
-        bool Extract(HttpContext context);
+        string Extract(HttpContext context);
     }
 }
