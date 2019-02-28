@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
-using ReqToCurl.Steps;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace ReqToCurl.Steps
 {
@@ -11,11 +11,11 @@ namespace ReqToCurl.Steps
             return context.Request.Headers.Count > 0;
         }
 
-        public string Extract(HttpContext context)
+        public async Task<string> ExtractAsync(HttpContext context)
         {
             var requestHeaders = context.Request.Headers;
 
-            return string.Join(" ", requestHeaders.Select(x => $"-H \"{x.Key} : {x.Value}\""));
+            return await Task.FromResult(string.Join(" ", requestHeaders.Select(x => $"-H \"{x.Key} : {x.Value}\"")));
         }
     }
 }

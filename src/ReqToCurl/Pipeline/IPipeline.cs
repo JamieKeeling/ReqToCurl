@@ -1,9 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
+using System.Threading.Tasks;
 
 namespace ReqToCurl.Pipeline
 {
     interface IPipeline
     {
-        string Execute(HttpContext context);
+        Task<string> ExecuteAsync(HttpContext context);
     }
 }

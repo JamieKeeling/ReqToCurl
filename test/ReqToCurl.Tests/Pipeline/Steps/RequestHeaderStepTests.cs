@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Moq;
 using ReqToCurl.Steps;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace ReqToCurl.Tests.Pipeline.Steps
@@ -45,7 +46,7 @@ namespace ReqToCurl.Tests.Pipeline.Steps
         }
 
         [Fact]
-        public void RequestHeaderExtractor_WithHeaders_OutputsHeaderString()
+        public async Task RequestHeaderExtractor_WithHeaders_OutputsHeaderString()
         {
             var headers = new HeaderDictionary
             {
@@ -62,7 +63,7 @@ namespace ReqToCurl.Tests.Pipeline.Steps
             var requestHeaderStep = new RequestHeaderStep();
 
             var expectedOutput = "-H \"x-header : value\" -H \"x-another-header : anothervalue\"";
-            var actualOutput = requestHeaderStep.Extract(mockHttpContext.Object);
+            var actualOutput = await requestHeaderStep.ExtractAsync(mockHttpContext.Object);
 
             actualOutput.Should().BeEquivalentTo(expectedOutput);
         }
