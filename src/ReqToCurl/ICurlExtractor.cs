@@ -1,9 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
+using System.Threading.Tasks;
 
 namespace ReqToCurl
 {
     public interface ICurlExtractor
     {
-        string ExtractRequest(HttpContext context);
+        Task<string> ExtractRequestAsync(HttpContext context);
     }
 }

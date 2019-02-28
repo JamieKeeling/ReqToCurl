@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ReqToCurl.Pipeline
 {
@@ -15,7 +16,7 @@ namespace ReqToCurl.Pipeline
         {
             _extractionSteps = extractionSteps;
         }
-        public string Execute(HttpContext context)
+        public async Task<string> ExecuteAsync(HttpContext context)
         {
             var extractedContent = new StringBuilder();
 
@@ -23,7 +24,7 @@ namespace ReqToCurl.Pipeline
             {
                 foreach (IExtractionStep extractionStep in _extractionSteps.Where(step => step.CanExtract(context)))
                 {
-                    extractedContent.Append(extractionStep.Extract(context));
+                    extractedContent.Append(await extractionStep.ExtractAsync(context));
                 }
             }
             catch (Exception ex)
