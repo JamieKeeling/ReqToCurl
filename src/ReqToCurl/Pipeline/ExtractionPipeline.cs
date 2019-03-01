@@ -22,9 +22,13 @@ namespace ReqToCurl.Pipeline
 
             try
             {
-                foreach (IExtractionStep extractionStep in _extractionSteps.Where(step => step.CanExtract(context)))
+                var awaitableTasks = _extractionSteps.Where(step => step.CanExtract(context)).Select(s => s.ExtractAsync(context));
+
+                await Task.WhenAll(awaitableTasks);
+
+                foreach (var awaitableTask in awaitableTasks)
                 {
-                    extractedContent.Append(await extractionStep.ExtractAsync(context));
+                    extractedContent.Append(awaitableTask.Result);
                 }
             }
             catch (Exception ex)
