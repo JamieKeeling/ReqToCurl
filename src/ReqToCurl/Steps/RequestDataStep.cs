@@ -18,7 +18,7 @@ namespace ReqToCurl.Steps
 
             using (var reader = new StreamReader(context.Request.Body))
             {
-                var requestBody = await reader.ReadToEndAsync();
+                var requestBody = await reader.ReadToEndAsync().ConfigureAwait(false);
 
                 //Reset to the beginning so subsequent reads see the content
                 context.Request.Body.Seek(0, SeekOrigin.Begin);

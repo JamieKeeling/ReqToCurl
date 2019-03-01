@@ -24,7 +24,7 @@ namespace ReqToCurl.Pipeline
             {
                 var awaitableTasks = _extractionSteps.Where(step => step.CanExtract(context)).Select(s => s.ExtractAsync(context));
 
-                await Task.WhenAll(awaitableTasks);
+                await Task.WhenAll(awaitableTasks).ConfigureAwait(false);
 
                 foreach (var awaitableTask in awaitableTasks)
                 {

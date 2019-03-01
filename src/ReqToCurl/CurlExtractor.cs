@@ -20,10 +20,10 @@ namespace ReqToCurl
         {
             curlRequest.AppendLine($"curl {context.Request.GetEncodedUrl()}");
 
-            var extractedData = await _extractionPipeline.ExecuteAsync(context);
+            var extractedData = await _extractionPipeline.ExecuteAsync(context).ConfigureAwait(false);
 
             if(!string.IsNullOrWhiteSpace(extractedData))
-                curlRequest.AppendLine(await _extractionPipeline.ExecuteAsync(context));
+                curlRequest.AppendLine(extractedData);
 
             return curlRequest.ToString();
         }
