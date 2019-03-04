@@ -8,7 +8,7 @@ namespace ReqToCurl
 {
     public class CurlExtractor : ICurlExtractor
     {
-        private StringBuilder curlRequest = new StringBuilder();
+        private readonly StringBuilder _curlRequest = new StringBuilder();
         private readonly IPipeline _extractionPipeline;
 
         public CurlExtractor(IPipeline extractionPipeline)
@@ -18,14 +18,14 @@ namespace ReqToCurl
 
         public async Task<string> ExtractRequestAsync(HttpContext context)
         {
-            curlRequest.AppendLine($"curl {context.Request.GetEncodedUrl()}");
+            _curlRequest.AppendLine($"curl {context.Request.GetEncodedUrl()}");
 
             var extractedData = await _extractionPipeline.ExecuteAsync(context).ConfigureAwait(false);
 
             if(!string.IsNullOrWhiteSpace(extractedData))
-                curlRequest.AppendLine(extractedData);
+                _curlRequest.AppendLine(extractedData);
 
-            return curlRequest.ToString();
+            return _curlRequest.ToString();
         }
     }
 }

@@ -8,7 +8,7 @@ namespace ReqToCurl.Steps
     {
         public bool CanExtract(HttpContext context)
         {
-            return context.Request.Headers.Count > 0;
+            return context.Request.Headers != null && context.Request.Headers.Any();
         }
 
         public async Task<string> ExtractAsync(HttpContext context)

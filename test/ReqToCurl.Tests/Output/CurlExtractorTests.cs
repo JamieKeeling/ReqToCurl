@@ -4,9 +4,11 @@ using Moq;
 using Newtonsoft.Json;
 using ReqToCurl.Pipeline;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
+using ReqToCurl.Steps;
 using Xunit;
 
 namespace ReqToCurl.Tests.Output
