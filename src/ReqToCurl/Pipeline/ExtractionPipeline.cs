@@ -22,16 +22,16 @@ namespace ReqToCurl.Pipeline
 
             try
             {
-                var extractionTasks = _extractionSteps.Where(step => step.CanExtract(context)).Select(s => s.ExtractAsync(context)).ToList();
+                var extractionTasks = _extractionSteps.Where(step => step.CanExtract(context)).Select(s => s.ExtractAsync(context)).ToArray();
 
                 if (extractionTasks.Any())
                 {
                     //We don't care about the execution order so collate the Tasks and await them
-                    await Task.WhenAll(extractionTasks).ConfigureAwait(false);
+                    var awaitedOutput = await Task.WhenAll(extractionTasks).ConfigureAwait(false);
 
-                    foreach (var awaitableTask in extractionTasks)
+                    foreach (var awaitableTask in awaitedOutput)
                     {
-                        extractedContent.Append(awaitableTask.Result);
+                        extractedContent.Append(awaitableTask);
                     }
                 }
             }
