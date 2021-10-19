@@ -16,6 +16,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		global.json = global.json
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "cicd", "cicd", "{D333E4D6-C05A-49E3-B3A3-46CFFA1A60BE}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\dotnet.yml = .github\workflows\dotnet.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +42,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{176E932F-3953-4DC9-83E6-6279BCE27FF3} = {F99F42B5-3015-4C6F-A0B6-5039F32DE208}
 		{057DB854-7DD3-4DEB-8A8C-8B740E4FC71F} = {2E22FD99-EAFF-49B9-A5DA-4E185148C85C}
+		{D333E4D6-C05A-49E3-B3A3-46CFFA1A60BE} = {5C93B85E-F0E4-4CCC-B467-FE30D564D1E5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {EA91EA46-A284-4FBD-A753-1745E9A98FA3}
