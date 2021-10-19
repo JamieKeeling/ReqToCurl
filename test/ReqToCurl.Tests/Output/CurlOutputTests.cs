@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
 using Moq;
+using ReqToCurl.Logger;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -17,7 +16,7 @@ namespace ReqToCurl.Tests.Output
             var mockCurlExtractor = new Mock<ICurlExtractor>();
             mockCurlExtractor.Setup(m => m.ExtractRequestAsync(It.IsAny<HttpContext>())).ReturnsAsync(curlString);
 
-            var mockLogger = new Mock<ILogger<RequestToCurlMiddleware>>();
+            var mockLogger = new Mock<ISimpleLogger<RequestToCurlMiddleware>>();
 
             var middlewareInstance = new RequestToCurlMiddleware((innerHttpContext) => Task.FromResult(0), mockLogger.Object, mockCurlExtractor.Object);
 
@@ -30,12 +29,7 @@ namespace ReqToCurl.Tests.Output
 
             await middlewareInstance.InvokeAsync(mockHttpContext.Object);
 
-            mockLogger.Verify(x => x.Log(LogLevel.Information,
-                                            It.IsAny<EventId>(),
-                                            It.Is<IReadOnlyList<KeyValuePair<string, object>>>(x => x[0].Value.ToString() == curlString),
-                                            null,
-                                            It.IsAny<Func<object, Exception, string>>()),
-                                            Times.Once);
+            mockLogger.Verify(x => x.Information(curlString), Times.Once);
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
+using ReqToCurl.Logger;
 using System.Threading.Tasks;
 
 namespace ReqToCurl
@@ -7,10 +7,10 @@ namespace ReqToCurl
     public class RequestToCurlMiddleware
     {
         private readonly RequestDelegate _next;
-        private readonly ILogger<RequestToCurlMiddleware> _logger;
+        private readonly ISimpleLogger<RequestToCurlMiddleware> _logger;
         private readonly ICurlExtractor _curlExtractor;
 
-        public RequestToCurlMiddleware(RequestDelegate next, ILogger<RequestToCurlMiddleware> logger, ICurlExtractor curlExtractor)
+        public RequestToCurlMiddleware(RequestDelegate next, ISimpleLogger<RequestToCurlMiddleware> logger, ICurlExtractor curlExtractor)
         {
             _next = next;
             _logger = logger;
@@ -24,10 +24,8 @@ namespace ReqToCurl
 
             if (context.Response.HasStarted)
             {
-
-                _logger.Log(LogLevel.Information, $"Response has started with a HTTP {context.Response.StatusCode} value");
-
-                _logger.Log(LogLevel.Information, await _curlExtractor.ExtractRequestAsync(context).ConfigureAwait(false));
+                _logger.Information($"Response has started with a HTTP {context.Response.StatusCode} value");
+                _logger.Information(await _curlExtractor.ExtractRequestAsync(context).ConfigureAwait(false));
             }
         }
     }

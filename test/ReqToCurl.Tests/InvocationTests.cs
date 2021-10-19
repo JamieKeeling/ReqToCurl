@@ -1,8 +1,6 @@
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
 using Moq;
-using System;
-using System.Collections.Generic;
+using ReqToCurl.Logger;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -13,7 +11,7 @@ namespace ReqToCurl.Tests
         [Fact]
         public async void Invoked_WhenResponseHasStarted_IsTrue()
         {
-            var mockLogger = new Mock<ILogger<RequestToCurlMiddleware>>();
+            var mockLogger = new Mock<ISimpleLogger<RequestToCurlMiddleware>>();
 
             var middlewareInstance = new RequestToCurlMiddleware((innerHttpContext) => Task.FromResult(0), mockLogger.Object, Mock.Of<ICurlExtractor>());
 
@@ -26,18 +24,13 @@ namespace ReqToCurl.Tests
 
             await middlewareInstance.InvokeAsync(mockHttpContext.Object);
 
-            mockLogger.Verify(x => x.Log(LogLevel.Information,
-                                                        It.IsAny<EventId>(),
-                                                        It.Is<IReadOnlyList<KeyValuePair<string, object>>>(x => x[0].Value.ToString() == "Response has started with a HTTP 200 value"),
-                                                        null,
-                                                        It.IsAny<Func<object, Exception, string>>()),
-                                                        Times.Once);
+            mockLogger.Verify(x => x.Information("Response has started with a HTTP 200 value"), Times.Once);
         }
 
         [Fact]
         public async void NotInvoked_WhenResponseHasStarted_IsFalse()
         {
-            var mockLogger = new Mock<ILogger<RequestToCurlMiddleware>>();
+            var mockLogger = new Mock<ISimpleLogger<RequestToCurlMiddleware>>();
 
             var middlewareInstance = new RequestToCurlMiddleware((innerHttpContext) => Task.FromResult(0), mockLogger.Object, Mock.Of<ICurlExtractor>());
 
@@ -49,12 +42,7 @@ namespace ReqToCurl.Tests
 
             await middlewareInstance.InvokeAsync(mockHttpContext.Object);
 
-            mockLogger.Verify(x => x.Log(LogLevel.Information,
-                                            It.IsAny<EventId>(),
-                                            It.IsAny<IReadOnlyList<KeyValuePair<string, object>>>(),
-                                            null,
-                                            It.IsAny<Func<object, Exception, string>>()),
-                                            Times.Never);
+            mockLogger.Verify(x => x.Information(It.IsAny<string>()), Times.Never);
         }
     }
 }
