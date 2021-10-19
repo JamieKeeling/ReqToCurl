@@ -22,7 +22,9 @@ namespace ReqToCurl.Pipeline
 
             try
             {
-                var extractionTasks = _extractionSteps.Where(step => step.CanExtract(context)).Select(s => s.ExtractAsync(context)).ToList();
+                var extractionTasks = _extractionSteps.Where(step => step.CanExtract(context))
+                    .Select(s => s.ExtractAsync(context))
+                    .ToList();
 
                 if (extractionTasks.Any())
                 {

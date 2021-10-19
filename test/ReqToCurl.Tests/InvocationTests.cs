@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Internal;
 using Moq;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -27,11 +27,11 @@ namespace ReqToCurl.Tests
             await middlewareInstance.InvokeAsync(mockHttpContext.Object);
 
             mockLogger.Verify(x => x.Log(LogLevel.Information,
-                                            It.IsAny<EventId>(),
-                                            new FormattedLogValues("Response has started with a HTTP 200 value"),
-                                            null,
-                                            It.IsAny<Func<object, Exception, string>>()),
-                                            Times.Once);
+                                                        It.IsAny<EventId>(),
+                                                        It.Is<IReadOnlyList<KeyValuePair<string, object>>>(x => x[0].Value.ToString() == "Response has started with a HTTP 200 value"),
+                                                        null,
+                                                        It.IsAny<Func<object, Exception, string>>()),
+                                                        Times.Once);
         }
 
         [Fact]
@@ -51,7 +51,7 @@ namespace ReqToCurl.Tests
 
             mockLogger.Verify(x => x.Log(LogLevel.Information,
                                             It.IsAny<EventId>(),
-                                            It.IsAny<FormattedLogValues>(),
+                                            It.IsAny<IReadOnlyList<KeyValuePair<string, object>>>(),
                                             null,
                                             It.IsAny<Func<object, Exception, string>>()),
                                             Times.Never);

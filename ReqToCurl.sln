@@ -1,15 +1,20 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.168
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29230.47
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReqToCurl", "src\ReqToCurl\ReqToCurl.csproj", "{176E932F-3953-4DC9-83E6-6279BCE27FF3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReqToCurl", "src\ReqToCurl\ReqToCurl.csproj", "{176E932F-3953-4DC9-83E6-6279BCE27FF3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{F99F42B5-3015-4C6F-A0B6-5039F32DE208}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{2E22FD99-EAFF-49B9-A5DA-4E185148C85C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReqToCurl.Tests", "test\ReqToCurl.Tests\ReqToCurl.Tests.csproj", "{057DB854-7DD3-4DEB-8A8C-8B740E4FC71F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReqToCurl.Tests", "test\ReqToCurl.Tests\ReqToCurl.Tests.csproj", "{057DB854-7DD3-4DEB-8A8C-8B740E4FC71F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5C93B85E-F0E4-4CCC-B467-FE30D564D1E5}"
+	ProjectSection(SolutionItems) = preProject
+		global.json = global.json
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

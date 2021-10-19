@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Internal;
 using Moq;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -32,7 +32,7 @@ namespace ReqToCurl.Tests.Output
 
             mockLogger.Verify(x => x.Log(LogLevel.Information,
                                             It.IsAny<EventId>(),
-                                            new FormattedLogValues(curlString),
+                                            It.Is<IReadOnlyList<KeyValuePair<string, object>>>(x => x[0].Value.ToString() == curlString),
                                             null,
                                             It.IsAny<Func<object, Exception, string>>()),
                                             Times.Once);
